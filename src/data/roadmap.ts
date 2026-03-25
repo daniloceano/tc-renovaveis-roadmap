@@ -187,9 +187,18 @@ export const modules: Module[] = [
     description:
       'Desenvolvimento de arquétipos paramétricos para ciclones extratropicais do Atlântico Sul combinando características do ciclo de vida (trajetória, intensidade, duração) com diagnósticos do Ciclo de Energia de Lorenz como entradas para clusterização. Resultados preliminares sugerem que os ciclones se agrupam em grupos energeticamente distintos, fornecendo uma base física para modelos de tempestade paramétricos usados na avaliação de risco costeiro e de energia offshore.',
     links: [
-      { label: 'Referência: ciclo de vida', url: 'https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/joc.8539' },
-      { label: 'Referência: energética', url: 'https://link.springer.com/article/10.1007/s00382-025-07918-y' },
-      { label: 'Resultados preliminares', url: 'https://paper-energy-patterns.vercel.app' },
+      {
+        "label": "Referência: ciclo de vida",
+        "url": "https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/joc.8539"
+      },
+      {
+        "label": "Referência: energética",
+        "url": "https://link.springer.com/article/10.1007/s00382-025-07918-y"
+      },
+      {
+        "label": "Resultados Energy Patterns",
+        "url": "https://paper-energy-patterns.vercel.app"
+      }
     ],
     tasks: [
       {
