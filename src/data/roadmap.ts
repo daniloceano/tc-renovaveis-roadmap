@@ -42,7 +42,7 @@ export const modules: Module[] = [
       {
         id: 'magica-package',
         title: 'Pacote MagicA',
-        status: 'in-progress',
+        status: 'done',
         type: 'software',
         description:
           'MagicA é um pacote Python desenvolvido internamente para ajuste robusto de distribuições estatísticas de velocidade do vento, incluindo simulações Monte Carlo e seleção automática de distribuições (AutoFitter). O frontend está sendo desenvolvido por outros membros da equipe.',
@@ -60,7 +60,7 @@ export const modules: Module[] = [
       {
         id: 'artigo-offshore',
         title: 'Artigo: ajuste para todos os pontos offshore do Brasil',
-        status: 'in-progress',
+        status: 'planned',
         type: 'article',
         description:
           'Manuscrito científico caracterizando distribuições de velocidade do vento em todos os pontos de grade offshore brasileiros com reanálise ERA5, cobrindo múltiplas famílias de distribuições via MagicA AutoFitter.',
@@ -204,7 +204,7 @@ export const modules: Module[] = [
       {
         id: 'revisao-bibliografica',
         title: 'Revisão bibliográfica',
-        status: 'done',
+        status: 'in-progress',
         type: 'planning',
         description:
           'Revisão da literatura sobre modelos paramétricos de ciclones extratropicais, caracterização do ciclo de vida e energética — com foco nos sistemas do Atlântico Sul.',
@@ -213,7 +213,7 @@ export const modules: Module[] = [
       {
         id: 'base-ciclones',
         title: 'Base de ciclones',
-        status: 'in-progress',
+        status: 'planned',
         type: 'software',
         description:
           'Construção de um banco de dados de ciclones extratropicais do Atlântico Sul usando características do ciclo de vida (trajetória, intensidade, duração) e energética (termos do Ciclo de Energia de Lorenz) como vetores de características para clusterização.',
@@ -222,7 +222,7 @@ export const modules: Module[] = [
       {
         id: 'estatisticas-extremos',
         title: 'Estatísticas de ocorrência e extremos',
-        status: 'in-progress',
+        status: 'planned',
         type: 'results',
         description:
           'Análise de estatísticas de ocorrência de ciclones e caracterização de eventos extremos para o Atlântico Sul, apoiando modelos de tempestade paramétricos para avaliação de risco costeiro.',
@@ -250,8 +250,8 @@ export const modules: Module[] = [
       {
         id: 'analise-akara',
         title: 'Análise - campo de ondas do Akará',
-        status: 'in-progress',
-        type: 'results',
+        status: 'on-hold',
+        type: 'article',
         description:
           'Análise do campo de ondas na área offshore do Akará, caracterizando a distribuição e extremos da altura significativa de ondas para avaliação do sítio de energia renovável.',
         tags: ['ondas', 'offshore', 'Hs', 'Akará'],
@@ -278,10 +278,10 @@ export const modules: Module[] = [
         tags: ['WindLab', 'visualização', 'automação'],
       },
       {
-        id: 'windlab-passos-futuros',
-        title: 'Passos futuros',
-        status: 'planned',
-        type: 'planning',
+        id: 'windlab-interface-grafica',
+        title: 'Interface gráfica',
+        status: 'in-progress',
+        type: 'software',
         description:
           'Quatro etapas de desenvolvimento planejadas para o WindLab incluindo tipos adicionais de gráficos, processamento em lote, geração de relatórios e integração com o pipeline de dados do projeto.',
         tags: ['WindLab', 'planejamento'],
@@ -299,7 +299,7 @@ export const modules: Module[] = [
       {
         id: 'downscaling-mpas',
         title: 'Downscaling com MPAS',
-        status: 'on-hold',
+        status: 'uncertain',
         type: 'results',
         description:
           'Downscaling dinâmico de cenários de mudanças climáticas usando MPAS, condicionado à conclusão da configuração das simulações de referência.',
@@ -308,7 +308,7 @@ export const modules: Module[] = [
       {
         id: 'bias-correction-extremos',
         title: 'Bias correction do ERA5 → análise de extremos',
-        status: 'on-hold',
+        status: 'uncertain',
         type: 'results',
         description:
           'Correção de viés dos dados de reanálise ERA5 seguida de análise de valores extremos para recursos de vento e ondas sob cenários climáticos futuros.',
