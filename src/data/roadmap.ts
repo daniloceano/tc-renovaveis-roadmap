@@ -51,8 +51,8 @@ export const modules: Module[] = [
       {
         id: 'large-sample-size',
         title: 'Large Sample Size',
-        status: 'done',
-        type: 'results',
+        status: 'in-progress',
+        type: 'article',
         description:
           'Aborda o artefato estatístico pelo qual testes clássicos de aderência (KS, Chi²) rejeitam ajustes válidos quando aplicados a grandes conjuntos de dados ERA5. Um framework de subamostragem Monte Carlo foi desenvolvido para identificar tamanhos de amostra ótimos usando estabilidade de RMSE (algoritmo Kneedle).',
         tags: ['vento', 'estatística', 'ERA5'],
@@ -67,13 +67,13 @@ export const modules: Module[] = [
         tags: ['vento', 'offshore', 'MagicA', 'ERA5'],
       },
       {
-        id: 'patente-magica',
-        title: 'Patente - MagicA',
-        status: 'planned',
-        type: 'patent',
+        id: 'frontend-magica',
+        title: 'Frontend - MagicA',
+        status: 'in-progress',
+        type: 'software',
         description:
-          'Pedido de patente para a metodologia de ajuste estatístico MagicA, cobrindo o framework de otimização Monte Carlo e o algoritmo AutoFitter.',
-        tags: ['MagicA', 'patente'],
+          'Desenvolvimento do frontend para o pacote MagicA, permitindo interação visual com os resultados do ajuste estatístico.',
+        tags: ['MagicA', 'frontend'],
       },
       {
         id: 'wt-brasil',
@@ -125,7 +125,7 @@ export const modules: Module[] = [
       },
       {
         id: 'artigo-clustering',
-        title: 'Artigo ? (2)',
+        title: 'Artigo ?',
         status: 'uncertain',
         type: 'article',
         description:
@@ -153,7 +153,7 @@ export const modules: Module[] = [
     tasks: [
       {
         id: 'simulacao-teste-meq',
-        title: 'Simulação teste: MEq (3)',
+        title: 'Simulação teste: MEq',
         status: 'in-progress',
         type: 'results',
         description:
@@ -270,7 +270,7 @@ export const modules: Module[] = [
       },
       {
         id: 'windlab-passos-futuros',
-        title: 'Passos futuros (4)',
+        title: 'Passos futuros',
         status: 'planned',
         type: 'planning',
         description:
