@@ -154,7 +154,7 @@ export const modules: Module[] = [
       {
         id: 'simulacao-teste-meq',
         title: 'Simulação teste: MEq',
-        status: 'in-progress',
+        status: 'planned',
         type: 'results',
         description:
           'Simulações de teste usando MPAS na resolução mesoescala-equatorial para avaliar a configuração do modelo antes das rodadas de longo prazo.',
