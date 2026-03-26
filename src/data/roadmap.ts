@@ -69,7 +69,7 @@ export const modules: Module[] = [
       },
       {
         id: 'artigo-offshore',
-        title: 'Artigo: ajuste para todos os pontos offshore do Brasil',
+        title: 'Ajuste para todos os pontos offshore do Brasil',
         status: 'planned',
         type: 'article',
         description:
