@@ -134,15 +134,6 @@ export const modules: Module[] = [
         tags: ['offshore', 'linha de costa', 'pré-processamento'],
       },
       {
-        id: 'artigo-clustering',
-        title: 'Artigo ?',
-        status: 'uncertain',
-        type: 'article',
-        description:
-          'Possível artigo científico sobre metodologia e resultados de clusterização espacial — escopo e periódico-alvo em discussão com a equipe.',
-        tags: ['clusterização', 'artigo'],
-      },
-      {
         id: 'regioes-homogeneas',
         title: 'Regiões com regime homogêneo',
         status: 'done',
@@ -150,6 +141,15 @@ export const modules: Module[] = [
         description:
           'Clusterização espacial concluída, identificando regiões com regimes de vento estatisticamente homogêneos no Brasil. Resultados disponíveis de forma interativa.',
         tags: ['clusterização', 'vento', 'Brasil'],
+      },
+      {
+        id: 'artigo-clustering',
+        title: 'Artigo ?',
+        status: 'uncertain',
+        type: 'article',
+        description:
+          'Possível artigo científico sobre metodologia e resultados de clusterização espacial — escopo e periódico-alvo em discussão com a equipe.',
+        tags: ['clusterização', 'artigo'],
       },
     ],
   },
