@@ -35,9 +35,19 @@ export const modules: Module[] = [
     description:
       'Caracterização estatística das distribuições de velocidade do vento no Brasil com dados de reanálise ERA5. O fluxo de trabalho aplica estimação robusta de parâmetros — incluindo subamostragem Monte Carlo e seletor automático de distribuições (MagicA AutoFitter) — para produzir parâmetros Weibull e de melhor ajuste, espacialmente distribuídos, para pontos de grade onshore e offshore. Os resultados alimentam diretamente a análise de clusterização espacial.',
     links: [
-      { label: 'Documentação MagicA', url: 'https://magica.readthedocs.io/en/latest/' },
-      { label: 'Resultados', url: 'https://wind-adjustment-tc-petro.vercel.app' },
-    ],
+        {
+          "label": "Documentação MagicA",
+          "url": "https://magica.readthedocs.io/en/latest/"
+        },
+        {
+          "label": "Resultados",
+          "url": "https://wind-adjustment-tc-petro.vercel.app"
+        },
+        {
+          "label": "Protótipo - Frontend",
+          "url": "https://www.figma.com/design/Tbckp5xK6bUfkgUsl84gVY/MágicA?node-id=0-1&p=f&t=8DS33c1JP4BZzg2y-0"
+        }
+      ],
     tasks: [
       {
         id: 'magica-package',
