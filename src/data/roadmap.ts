@@ -125,12 +125,12 @@ export const modules: Module[] = [
         tags: ['vento', 'EOF', 'estatística'],
       },
       {
-        id: 'rotina-linha-costa',
-        title: 'Rotina: linha de costa',
+        id: 'mascara-linha-costa',
+        title: 'Máscara usando linha de costa',
         status: 'done',
         type: 'software',
         description:
-          'Rotina automatizada de distância à linha de costa desenvolvida para classificar pontos de grade como onshore/offshore e calcular métricas de proximidade usadas como características de clusterização.',
+          'Mascarar regiões onshore ou offshore com base na linha de costa brasileira.',
         tags: ['offshore', 'linha de costa', 'pré-processamento'],
       },
       {
@@ -141,6 +141,33 @@ export const modules: Module[] = [
         description:
           'Clusterização espacial concluída, identificando regiões com regimes de vento estatisticamente homogêneos no Brasil. Resultados disponíveis de forma interativa.',
         tags: ['clusterização', 'vento', 'Brasil'],
+      },
+      {
+        id: 'clusters-era5-k5',
+        title: 'Clusterização com k=5 (ERA5 sazonal)',
+        status: 'in-progress',
+        type: 'results',
+        description:
+          'Clusterização espacial de todos os dados sazonais do ERA5 com número fixo de clusters k=5. Análise exploratória para validação da estrutura ótima de grupos e identificação de padrões sazonais homogêneos.',
+        tags: ['clusterização', 'ERA5', 'sazonal', 'k-means'],
+      },
+      {
+        id: 'clusters-bacias-sedimentares',
+        title: 'Clusterização com limites de bacias sedimentares',
+        status: 'in-progress',
+        type: 'software',
+        description:
+          'Integração das geometrias de bacias sedimentares como limites para clusterização. Duas abordagens: (1) clusterizar apenas dentro dos limites das bacias, e (2) clusterizar globalmente e recortar os clusters usando as geometrias das bacias sedimentares. Comparação de metodologias para otimizar aplicabilidade em análise de recursos energéticos.',
+        tags: ['clusterização', 'bacias sedimentares', 'pré-processamento', 'espacial'],
+      },
+      {
+        id: 'centros-clusters-site',
+        title: 'Validação e ajuste de centroides no portal',
+        status: 'in-progress',
+        type: 'software',
+        description:
+          'Revisão, validação e ajuste de coordenadas dos centroides dos clusters no site de resultados interativo. Garantir que os centros representem adequadamente cada região e melhorar a visualização no portal.',
+        tags: ['clusterização', 'visualização', 'frontend', 'validação'],
       },
       {
         id: 'artigo-clustering',
