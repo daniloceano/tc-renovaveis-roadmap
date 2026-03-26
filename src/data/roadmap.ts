@@ -59,6 +59,15 @@ export const modules: Module[] = [
         tags: ['vento', 'estatística', 'MagicA'],
       },
       {
+        id: 'wt-brasil',
+        title: 'Ajustes p/ Brasil (Weibull e Bestfit)',
+        status: 'done',
+        type: 'results',
+        description:
+          'Ajuste Weibull e "melhor ajuste" concluído para todos os pontos de grade brasileiros (onshore e offshore) usando o MagicA AutoFitter.',
+        tags: ['vento', 'Weibull', 'ERA5'],
+      },   
+      {
         id: 'large-sample-size',
         title: 'Large Sample Size',
         status: 'in-progress',
@@ -68,15 +77,6 @@ export const modules: Module[] = [
         tags: ['vento', 'estatística', 'ERA5'],
       },
       {
-        id: 'artigo-offshore',
-        title: 'Ajuste para todos os pontos offshore do Brasil',
-        status: 'planned',
-        type: 'article',
-        description:
-          'Manuscrito científico caracterizando distribuições de velocidade do vento em todos os pontos de grade offshore brasileiros com reanálise ERA5, cobrindo múltiplas famílias de distribuições via MagicA AutoFitter.',
-        tags: ['vento', 'offshore', 'MagicA', 'ERA5'],
-      },
-      {
         id: 'frontend-magica',
         title: 'Frontend - MagicA',
         status: 'in-progress',
@@ -84,15 +84,15 @@ export const modules: Module[] = [
         description:
           'Desenvolvimento do frontend para o pacote MagicA, permitindo interação visual com os resultados do ajuste estatístico.',
         tags: ['MagicA', 'frontend'],
-      },
+      },      
       {
-        id: 'wt-brasil',
-        title: 'Ajustes p/ Brasil (Weibull e Bestfit)',
-        status: 'done',
-        type: 'results',
+        id: 'artigo-offshore',
+        title: 'Ajuste para todos os pontos offshore do Brasil',
+        status: 'planned',
+        type: 'article',
         description:
-          'Ajuste Weibull e "melhor ajuste" concluído para todos os pontos de grade brasileiros (onshore e offshore) usando o MagicA AutoFitter.',
-        tags: ['vento', 'Weibull', 'ERA5'],
+          'Manuscrito científico caracterizando distribuições de velocidade do vento em todos os pontos de grade offshore brasileiros com reanálise ERA5, cobrindo múltiplas famílias de distribuições via MagicA AutoFitter.',
+        tags: ['vento', 'offshore', 'MagicA', 'ERA5'],
       },
       {
         id: 'incorporar-amex',
