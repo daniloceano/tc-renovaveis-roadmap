@@ -87,11 +87,11 @@ export const modules: Module[] = [
       },
       {
         id: 'wt-brasil',
-        title: 'WT - ajustes p/ Brasil',
+        title: 'Ajustes p/ Brasil (Weibull e Bestfit)',
         status: 'done',
         type: 'results',
         description:
-          'Ajuste Weibull concluído para todos os pontos de grade brasileiros (onshore e offshore) usando infraestrutura de processamento paralelo sobre dados ERA5.',
+          'Ajuste Weibull e "melhor ajuste" concluído para todos os pontos de grade brasileiros (onshore e offshore) usando o MagicA AutoFitter.',
         tags: ['vento', 'Weibull', 'ERA5'],
       },
       {
@@ -100,7 +100,7 @@ export const modules: Module[] = [
         status: 'planned',
         type: 'software',
         description:
-          'Integração das rotinas de ajuste do vento na plataforma AMEX para uso operacional pelas equipes de avaliação de energia da Petrobras.',
+          'Integração das rotinas do projeto AMEX para análise conjunta de extrmos.',
         tags: ['vento', 'AMEX', 'integração'],
       },
     ],
