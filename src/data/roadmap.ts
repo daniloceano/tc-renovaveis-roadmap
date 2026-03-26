@@ -103,6 +103,15 @@ export const modules: Module[] = [
           'Integração das rotinas do projeto AMEX para análise conjunta de extrmos.',
         tags: ['vento', 'AMEX', 'integração'],
       },
+      {
+        id: 'ajuste-bacias-sedimentares',
+        title: 'Bestfit-temporal dentro das bacias sedimentares',
+        status: 'in-progress',
+        type: 'results',
+        description:
+          'Aplicação do pipeline de ajuste estatístico (Melhor ajuste com segmentação temporal) considerando apenas os pontos de grade localizados dentro dos limites das bacias sedimentares brasileiras. Parametrização espacial específica para análise de recursos eólicos em regiões estratégicas.',
+        tags: ['vento', 'bacias sedimentares', 'ERA5', 'MagicA'],
+      },
     ],
   },
   {
