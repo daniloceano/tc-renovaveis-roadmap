@@ -154,7 +154,7 @@ export const modules: Module[] = [
       {
         id: 'clusters-era5-k5',
         title: 'Clusterização com k=5 (ERA5 sazonal)',
-        status: 'in-progress',
+        status: 'done',
         type: 'results',
         description:
           'Clusterização espacial de todos os dados sazonais do ERA5 com número fixo de clusters k=5. Análise exploratória para validação da estrutura ótima de grupos e identificação de padrões sazonais homogêneos.',
@@ -163,7 +163,7 @@ export const modules: Module[] = [
       {
         id: 'clusters-bacias-sedimentares',
         title: 'Clusterização com limites de bacias sedimentares',
-        status: 'in-progress',
+        status: 'done',
         type: 'software',
         description:
           'Integração das geometrias de bacias sedimentares como limites para clusterização. Duas abordagens: (1) clusterizar apenas dentro dos limites das bacias, e (2) clusterizar globalmente e recortar os clusters usando as geometrias das bacias sedimentares. Comparação de metodologias para otimizar aplicabilidade em análise de recursos energéticos.',
@@ -172,11 +172,20 @@ export const modules: Module[] = [
       {
         id: 'centros-clusters-site',
         title: 'Validação e ajuste de centroides no portal',
-        status: 'in-progress',
+        status: 'done',
         type: 'software',
         description:
           'Revisão, validação e ajuste de coordenadas dos centroides dos clusters no site de resultados interativo. Garantir que os centros representem adequadamente cada região e melhorar a visualização no portal.',
         tags: ['clusterização', 'visualização', 'frontend', 'validação'],
+      },
+      {
+        id: 're-clusterizacao',
+        title: 'Re-clusterização',
+        status: 'in-progress',
+        type: 'results',
+        description:
+          'Re-clusterização de clusters definidos (macro -> micro) para identificar sub-regiões de regime homogêneo dentro dos clusters principais. Análise de estabilidade e interpretação física dos sub-clusters resultantes.',
+        tags: ['clusterização', 're-clusterização', 'estabilidade'],
       },
       {
         id: 'artigo-clustering',
@@ -244,6 +253,22 @@ export const modules: Module[] = [
       {
         "label": "Resultados Energy Patterns",
         "url": "https://paper-energy-patterns.vercel.app"
+      },
+      {
+        "label": "Referência: ciclo de vida",
+        "url": "https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/joc.8539"
+      },
+      {
+        "label": "Referência: energética",
+        "url": "https://link.springer.com/article/10.1007/s00382-025-07918-y"
+      },
+      {
+        "label": "Resultados Energy Patterns",
+        "url": "https://paper-energy-patterns.vercel.app"
+      },
+      {
+        "label": "Monitor de ciclones",
+        "url": "https://cyclone-monitor-south-atlantic.vercel.app"
       }
     ],
     tasks: [
@@ -258,7 +283,7 @@ export const modules: Module[] = [
       },
       {
         id: 'base-ciclones',
-        title: 'Base de ciclones',
+        title: 'Base de ciclones paramétricos',
         status: 'planned',
         type: 'software',
         description:
