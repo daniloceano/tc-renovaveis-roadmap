@@ -125,33 +125,6 @@ export const modules: Module[] = [
     ],
     tasks: [
       {
-        id: 'investigacao-eofs',
-        title: 'Investigação: EOFs',
-        status: 'done',
-        type: 'results',
-        description:
-          'Análise exploratória usando Funções Ortogonais Empíricas para identificar os modos espaciais dominantes de variabilidade do vento no Brasil como etapa de pré-processamento para a clusterização.',
-        tags: ['vento', 'EOF', 'estatística'],
-      },
-      {
-        id: 'mascara-linha-costa',
-        title: 'Máscara usando linha de costa',
-        status: 'done',
-        type: 'software',
-        description:
-          'Mascarar regiões onshore ou offshore com base na linha de costa brasileira.',
-        tags: ['offshore', 'linha de costa', 'pré-processamento'],
-      },
-      {
-        id: 'regioes-homogeneas',
-        title: 'Regiões com regime homogêneo',
-        status: 'done',
-        type: 'results',
-        description:
-          'Clusterização espacial concluída, identificando regiões com regimes de vento estatisticamente homogêneos no Brasil. Resultados disponíveis de forma interativa.',
-        tags: ['clusterização', 'vento', 'Brasil'],
-      },
-      {
         id: 'clusters-era5-k5',
         title: 'Clusterização com k=5 (ERA5 sazonal)',
         status: 'done',
@@ -181,7 +154,7 @@ export const modules: Module[] = [
       {
         id: 're-clusterizacao',
         title: 'Re-clusterização',
-        status: 'in-progress',
+        status: 'done',
         type: 'results',
         description:
           'Re-clusterização de clusters definidos (macro -> micro) para identificar sub-regiões de regime homogêneo dentro dos clusters principais. Análise de estabilidade e interpretação física dos sub-clusters resultantes.',
