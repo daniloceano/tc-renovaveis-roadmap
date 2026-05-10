@@ -88,7 +88,7 @@ export const modules: Module[] = [
       {
         id: 'ajuste-bacias-sedimentares',
         title: 'Bestfit-temporal dentro das bacias sedimentares',
-        status: 'in-progress',
+        status: 'done',
         type: 'results',
         description:
           'Aplicação do pipeline de ajuste estatístico (Melhor ajuste com segmentação temporal) considerando apenas os pontos de grade localizados dentro dos limites das bacias sedimentares brasileiras. Parametrização espacial específica para análise de recursos eólicos em regiões estratégicas.',
@@ -245,6 +245,15 @@ export const modules: Module[] = [
       }
     ],
     tasks: [
+      {
+        id: 'artigo-energy-patterns',
+        title: 'Artigo Energy Patterns',
+        status: 'in-progress',
+        type: 'article',
+        description:
+          'Desenvolvimento e submissão do artigo sobre os padrões energéticos de ciclones extratropicais do Atlântico Sul.',
+        tags: ['ciclones', 'Atlântico Sul', 'artigo'],
+      },
       {
         id: 'revisao-bibliografica',
         title: 'Revisão bibliográfica',
