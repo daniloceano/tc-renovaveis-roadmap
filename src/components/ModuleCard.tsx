@@ -11,18 +11,24 @@ interface ModuleCardProps {
 
 export function ModuleCard({ module }: ModuleCardProps) {
   const doneTasks = module.tasks.filter((t) => t.status === 'done').length;
+  const isDiscontinued = module.discontinued === true;
 
   return (
-    <div className="bg-slate-900 border border-slate-700/60 rounded-xl p-5 flex flex-col gap-4 hover:border-slate-600 transition-colors">
+    <div className={`border rounded-xl p-5 flex flex-col gap-4 transition-colors ${isDiscontinued ? 'bg-slate-950 border-slate-800 opacity-60' : 'bg-slate-900 border-slate-700/60 hover:border-slate-600'}`}>
       {/* Título clicável → /module/[id] */}
       <Link
         href={`/module/${module.id}`}
         className="flex items-center gap-2 group/title"
       >
-        <span className="text-2xl leading-none flex-shrink-0">{module.icon}</span>
-        <h2 className="text-sm font-semibold text-slate-100 leading-tight group-hover/title:underline group-hover/title:text-white transition-colors flex-1 min-w-0">
+        <span className={`text-2xl leading-none flex-shrink-0 ${isDiscontinued ? 'grayscale' : ''}`}>{module.icon}</span>
+        <h2 className={`text-sm font-semibold leading-tight flex-1 min-w-0 transition-colors ${isDiscontinued ? 'text-slate-500 line-through' : 'text-slate-100 group-hover/title:underline group-hover/title:text-white'}`}>
           {module.title}
         </h2>
+        {isDiscontinued && (
+          <span className="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-500 border border-slate-700 flex-shrink-0">
+            Descontinuado
+          </span>
+        )}
         <ArrowRight
           size={13}
           className="text-slate-600 group-hover/title:text-slate-300 transition-colors flex-shrink-0"

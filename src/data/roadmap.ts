@@ -5,7 +5,7 @@
 // Nenhum outro arquivo precisa ser alterado.
 // ============================================================
 
-export type TaskStatus = 'done' | 'in-progress' | 'planned' | 'on-hold' | 'uncertain';
+export type TaskStatus = 'done' | 'in-progress' | 'planned' | 'on-hold' | 'uncertain' | 'discontinued';
 export type TaskType = 'software' | 'results' | 'article' | 'patent' | 'planning';
 
 export interface Task {
@@ -23,6 +23,7 @@ export interface Module {
   title: string;
   icon: string;
   description: string;
+  discontinued?: boolean;
   links?: { label: string; url: string }[];
   tasks: Task[];
 }
@@ -86,15 +87,6 @@ export const modules: Module[] = [
         tags: ['vento', 'estatística', 'ERA5'],
       },
       {
-        id: 'frontend-magica',
-        title: 'Frontend - MagicA',
-        status: 'in-progress',
-        type: 'software',
-        description:
-          'Desenvolvimento do frontend para o pacote MagicA, permitindo interação visual com os resultados do ajuste estatístico.',
-        tags: ['MagicA', 'frontend'],
-      },    
-      {
         id: 'artigo-offshore',
         title: 'Ajuste para todos os pontos offshore do Brasil',
         status: 'planned',
@@ -111,6 +103,47 @@ export const modules: Module[] = [
         description:
           'Integração das rotinas do projeto AMEX para análise conjunta de extrmos.',
         tags: ['vento', 'AMEX', 'integração'],
+      },
+    ],
+  },
+  {
+    id: 'magica',
+    title: 'MagicA',
+    icon: '✨',
+    description:
+      'Desenvolvimento do frontend e integração de rotinas externas para o pacote MagicA, permitindo interação visual com os resultados do ajuste estatístico e incorporando fluxos de trabalho de visualização de vento.',
+    links: [
+      {
+        label: 'Documentação MagicA',
+        url: 'https://magica.readthedocs.io/en/latest/',
+      },
+      {
+        label: 'Protótipo - Frontend',
+        url: 'https://www.figma.com/design/Tbckp5xK6bUfkgUsl84gVY/MágicA?node-id=0-1&p=f&t=8DS33c1JP4BZzg2y-0',
+      },
+      {
+        label: 'GitHub - WindLab',
+        url: 'https://github.com/daniloceano/WindLab',
+      },
+    ],
+    tasks: [
+      {
+        id: 'frontend-magica',
+        title: 'Frontend - MagicA',
+        status: 'in-progress',
+        type: 'software',
+        description:
+          'Desenvolvimento do frontend para o pacote MagicA, permitindo interação visual com os resultados do ajuste estatístico de distribuições de vento.',
+        tags: ['MagicA', 'frontend'],
+      },
+      {
+        id: 'incorporar-windlab',
+        title: 'Incorporação de rotina do WindLab',
+        status: 'planned',
+        type: 'software',
+        description:
+          'Integração das rotinas de visualização automatizada de dados de vento do WindLab dentro do ecossistema MagicA, expandindo as capacidades de geração de figuras e análise exploratória.',
+        tags: ['MagicA', 'WindLab', 'integração', 'visualização'],
       },
     ],
   },
@@ -287,6 +320,7 @@ export const modules: Module[] = [
     id: 'altimetria-hs',
     title: 'Produtos de Altimetria (Hs)',
     icon: '🌊',
+    discontinued: true,
     description:
       'Processamento e análise de dados de altura significativa de ondas (Hs) provenientes de altimetria por satélite e fontes de reanálise para áreas offshore brasileiras. Rotinas automatizadas de download e processamento foram estabelecidas, com análise em andamento focada no sítio offshore de Akará para caracterização do clima de ondas e avaliação de valores extremos.',
     links: [],
@@ -294,7 +328,7 @@ export const modules: Module[] = [
       {
         id: 'rotinas-download-hs',
         title: 'Rotinas de download e processamento de dados',
-        status: 'done',
+        status: 'discontinued',
         type: 'software',
         description:
           'Rotinas automatizadas de download e processamento de dados de altura significativa de ondas (Hs) a partir de altimetria por satélite e fontes de reanálise.',
@@ -303,41 +337,11 @@ export const modules: Module[] = [
       {
         id: 'analise-akara',
         title: 'Análise - campo de ondas do Akará',
-        status: 'on-hold',
+        status: 'discontinued',
         type: 'article',
         description:
           'Análise do campo de ondas na área offshore do Akará, caracterizando a distribuição e extremos da altura significativa de ondas para avaliação do sítio de energia renovável.',
         tags: ['ondas', 'offshore', 'Hs', 'Akará'],
-      },
-    ],
-  },
-  {
-    id: 'windlab',
-    title: 'WindLab',
-    icon: '🔬',
-    description:
-      'Ferramenta Python para visualização automatizada de dados de vento e geração de figuras, apoiando fluxos de trabalho de análise reprodutíveis em todas as entregas do TC-Renováveis. O desenvolvimento ativo está focado na expansão de tipos de gráficos, capacidades de processamento em lote e integração com o pipeline de dados do projeto.',
-    links: [
-      { label: 'GitHub', url: 'https://github.com/daniloceano/WindLab' },
-    ],
-    tasks: [
-      {
-        id: 'graficos-automatizados',
-        title: 'Gráficos automatizados',
-        status: 'in-progress',
-        type: 'software',
-        description:
-          'Desenvolvimento de fluxos de trabalho automatizados de geração de figuras no WindLab, uma ferramenta Python para visualização e análise de dados de vento usada em todas as entregas do TC-Renováveis.',
-        tags: ['WindLab', 'visualização', 'automação'],
-      },
-      {
-        id: 'windlab-interface-grafica',
-        title: 'Interface gráfica',
-        status: 'in-progress',
-        type: 'software',
-        description:
-          'Quatro etapas de desenvolvimento planejadas para o WindLab incluindo tipos adicionais de gráficos, processamento em lote, geração de relatórios e integração com o pipeline de dados do projeto.',
-        tags: ['WindLab', 'planejamento'],
       },
     ],
   },

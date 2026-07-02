@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckCircle2, Circle, Clock, PauseCircle, HelpCircle, Loader2 } from 'lucide-react';
+import { CheckCircle2, Circle, Clock, PauseCircle, HelpCircle, Loader2, Archive } from 'lucide-react';
 import { TaskStatus } from '@/data/roadmap';
 
 interface StatusIconProps {
@@ -20,6 +20,8 @@ export function StatusIcon({ status, size = 16 }: StatusIconProps) {
       return <PauseCircle size={size} className="text-amber-400" />;
     case 'uncertain':
       return <HelpCircle size={size} className="text-orange-400" />;
+    case 'discontinued':
+      return <Archive size={size} className="text-slate-500" />;
     default:
       return <Circle size={size} className="text-slate-500" />;
   }
@@ -32,6 +34,7 @@ export function StatusBadge({ status }: { status: TaskStatus }) {
     planned: 'bg-slate-800/60 text-slate-400 border-slate-600',
     'on-hold': 'bg-amber-900/60 text-amber-300 border-amber-700',
     uncertain: 'bg-orange-900/60 text-orange-300 border-orange-700',
+    discontinued: 'bg-slate-900/60 text-slate-500 border-slate-700',
   };
 
   const labels: Record<TaskStatus, string> = {
@@ -40,6 +43,7 @@ export function StatusBadge({ status }: { status: TaskStatus }) {
     planned: 'Planejado',
     'on-hold': 'Em espera',
     uncertain: 'Incerto',
+    discontinued: 'Descontinuado',
   };
 
   return (
