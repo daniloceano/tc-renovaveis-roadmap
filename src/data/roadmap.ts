@@ -66,6 +66,15 @@ export const modules: Module[] = [
         description:
           'Ajuste Weibull e "melhor ajuste" concluído para todos os pontos de grade brasileiros (onshore e offshore) usando o MagicA AutoFitter.',
         tags: ['vento', 'Weibull', 'ERA5'],
+      },  
+      {
+        id: 'ajuste-bacias-sedimentares',
+        title: 'Bestfit-temporal dentro das bacias sedimentares',
+        status: 'done',
+        type: 'results',
+        description:
+          'Aplicação do pipeline de ajuste estatístico (Melhor ajuste com segmentação temporal) considerando apenas os pontos de grade localizados dentro dos limites das bacias sedimentares brasileiras. Parametrização espacial específica para análise de recursos eólicos em regiões estratégicas.',
+        tags: ['vento', 'bacias sedimentares', 'ERA5', 'MagicA'],
       },   
       {
         id: 'large-sample-size',
@@ -84,16 +93,7 @@ export const modules: Module[] = [
         description:
           'Desenvolvimento do frontend para o pacote MagicA, permitindo interação visual com os resultados do ajuste estatístico.',
         tags: ['MagicA', 'frontend'],
-      },
-      {
-        id: 'ajuste-bacias-sedimentares',
-        title: 'Bestfit-temporal dentro das bacias sedimentares',
-        status: 'done',
-        type: 'results',
-        description:
-          'Aplicação do pipeline de ajuste estatístico (Melhor ajuste com segmentação temporal) considerando apenas os pontos de grade localizados dentro dos limites das bacias sedimentares brasileiras. Parametrização espacial específica para análise de recursos eólicos em regiões estratégicas.',
-        tags: ['vento', 'bacias sedimentares', 'ERA5', 'MagicA'],
-      },      
+      },    
       {
         id: 'artigo-offshore',
         title: 'Ajuste para todos os pontos offshore do Brasil',
@@ -182,19 +182,19 @@ export const modules: Module[] = [
       {
         id: 'simulacao-teste-meq',
         title: 'Simulação teste: MEq',
-        status: 'planned',
+        status: 'done',
         type: 'results',
         description:
           'Simulações de teste usando MPAS na resolução mesoescala-equatorial para avaliar a configuração do modelo antes das rodadas de longo prazo.',
         tags: ['MPAS', 'simulação', 'mesoescala'],
       },
       {
-        id: 'simulacoes-longo-prazo',
-        title: 'Simulações de longo prazo',
-        status: 'planned',
+        id: 'simulacoes-time-slices',
+        title: 'Simulações de time-slices',
+        status: 'in-progress',
         type: 'results',
         description:
-          'Simulações MPAS de longo prazo cobrindo períodos multi-anuais para gerar uma climatologia de vento com downscaling dinâmico para o Brasil.',
+          'Simulações MPAS de time-slices cobrindo períodos multi-anuais para validação do modelo.',
         tags: ['MPAS', 'simulação', 'climatologia'],
       },
       {
@@ -247,7 +247,7 @@ export const modules: Module[] = [
     tasks: [
       {
         id: 'artigo-energy-patterns',
-        title: 'Artigo Energy Patterns',
+        title: 'Energy Patterns',
         status: 'in-progress',
         type: 'article',
         description:
