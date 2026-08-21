@@ -40,6 +40,10 @@ export const modules: Module[] = [
           "label": "Documentação MagicA",
           "url": "https://magica.readthedocs.io/en/latest/"
         },
+          {
+          "label": "Artigo - Large Sample Size",
+          "url": "https://www.sciencedirect.com/science/article/pii/S259017452600646X"
+        },
         {
           "label": "Resultados",
           "url": "https://wind-adjustment-tc-petro.vercel.app"
@@ -80,7 +84,7 @@ export const modules: Module[] = [
       {
         id: 'large-sample-size',
         title: 'Large Sample Size',
-        status: 'in-progress',
+        status: 'done',
         type: 'article',
         description:
           'Aborda o artefato estatístico pelo qual testes clássicos de aderência (KS, Chi²) rejeitam ajustes válidos quando aplicados a grandes conjuntos de dados ERA5. Um framework de subamostragem Monte Carlo foi desenvolvido para identificar tamanhos de amostra ótimos usando estabilidade de RMSE (algoritmo Kneedle).',
@@ -89,7 +93,7 @@ export const modules: Module[] = [
       {
         id: 'artigo-offshore',
         title: 'Ajuste para todos os pontos offshore do Brasil',
-        status: 'planned',
+        status: 'done',
         type: 'article',
         description:
           'Manuscrito científico caracterizando distribuições de velocidade do vento em todos os pontos de grade offshore brasileiros com reanálise ERA5, cobrindo múltiplas famílias de distribuições via MagicA AutoFitter.',
@@ -222,13 +226,31 @@ export const modules: Module[] = [
         tags: ['MPAS', 'simulação', 'mesoescala'],
       },
       {
-        id: 'simulacoes-time-slices',
-        title: 'Simulações de time-slices',
+        id: 'calibracao-do-modelo',
+        title: 'Calibração do modelo',
         status: 'in-progress',
+        type: 'results',
+        description:
+          'Ajuste de parâmetros do MPAS para melhorar a representação da climatologia de vento sobre o Brasil, com base em comparações com dados observacionais.',
+        tags: ['MPAS', 'calibração', 'climatologia'],
+      },
+      {
+        id: 'simulacoes-time-slices-meqbr',
+        title: 'Simulações de time-slices MEqBR',
+        status: 'planned',
         type: 'results',
         description:
           'Simulações MPAS de time-slices cobrindo períodos multi-anuais para validação do modelo.',
         tags: ['MPAS', 'simulação', 'climatologia'],
+      },
+      {
+        id: 'simulacoes-time-slices-rj',
+        title: 'Simulações de time-slices RJ',
+        status: 'planned',
+        type: 'results',
+        description:
+          'Simulações MPAS de time-slices focadas na região do Rio de Janeiro para análise detalhada da climatologia de vento.',
+        tags: ['MPAS', 'simulação', 'climatologia', 'RJ'],
       },
       {
         id: 'climatologia-mpas',
@@ -249,35 +271,36 @@ export const modules: Module[] = [
       'Desenvolvimento de arquétipos paramétricos para ciclones extratropicais do Atlântico Sul combinando características do ciclo de vida (trajetória, intensidade, duração) com diagnósticos do Ciclo de Energia de Lorenz como entradas para clusterização. Resultados preliminares sugerem que os ciclones se agrupam em grupos energeticamente distintos, fornecendo uma base física para modelos de tempestade paramétricos usados na avaliação de risco costeiro e de energia offshore.',
     links: [
       {
-        "label": "Referência: ciclo de vida",
-        "url": "https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/joc.8539"
-      },
-      {
-        "label": "Referência: energética",
-        "url": "https://link.springer.com/article/10.1007/s00382-025-07918-y"
-      },
-      {
-        "label": "Resultados Energy Patterns",
-        "url": "https://paper-energy-patterns.vercel.app"
-      },
-      {
-        "label": "Referência: ciclo de vida",
-        "url": "https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/joc.8539"
-      },
-      {
-        "label": "Referência: energética",
-        "url": "https://link.springer.com/article/10.1007/s00382-025-07918-y"
-      },
-      {
-        "label": "Resultados Energy Patterns",
-        "url": "https://paper-energy-patterns.vercel.app"
-      },
-      {
         "label": "Monitor de ciclones",
         "url": "https://cyclone-monitor-south-atlantic.vercel.app"
+      },
+      {
+        "label": "Streamlit - ventos dos ciclones",
+        "url": "https://vendaval-ciclone-dashboard-tvdfgy2gapa5qsy262yue8.streamlit.app"
+      },
+      {
+        "label": "Referência: ciclo de vida",
+        "url": "https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/joc.8539"
+      },
+      {
+        "label": "Referência: energética",
+        "url": "https://link.springer.com/article/10.1007/s00382-025-07918-y"
+      },
+      {
+        "label": "Resultados Energy Patterns",
+        "url": "https://paper-energy-patterns.vercel.app"
       }
     ],
     tasks: [
+      {
+        id: 'monitor-ciclones',
+        title: 'Monitor de ciclones',
+        status: 'done',
+        type: 'software',
+        description:
+          'Desenvolvimento de um monitor interativo de ciclones extratropicais do Atlântico Sul, permitindo visualização de trajetórias, intensidade e características energéticas dos sistemas.',
+        tags: ['ciclones', 'Atlântico Sul', 'monitoramento'],
+      },
       {
         id: 'artigo-energy-patterns',
         title: 'Energy Patterns',
@@ -286,6 +309,15 @@ export const modules: Module[] = [
         description:
           'Desenvolvimento e submissão do artigo sobre os padrões energéticos de ciclones extratropicais do Atlântico Sul.',
         tags: ['ciclones', 'Atlântico Sul', 'artigo'],
+      },
+      {
+        id: 'caracterizacao-vento-ciclones',
+        title: 'Caracterização da distribuição de vento nos ciclones',
+        status: 'in-progress',
+        type: 'article',
+        description:
+          'Análise da distribuição espacial de vento nos ciclones extratropicais do Atlântico Sul.',
+        tags: ['ciclones', 'Atlântico Sul', 'vento'],
       },
       {
         id: 'revisao-bibliografica',
