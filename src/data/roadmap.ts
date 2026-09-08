@@ -274,7 +274,7 @@ export const modules: Module[] = [
         id: 'refazer-simulacoes-oisst',
         title: 'Refazer simulações após correção da interpolação do OISST',
         status: 'in-progress',
-        type: 'results',
+        type: 'article',
         description:
           'Re-execução dos experimentos no domínio MeqBr 5km após identificação e correção de um problema na rotina de interpolação dos dados de TSM do OISST.',
         tags: ['MPAS', 'MeqBr', 'OISST', 'correção'],
