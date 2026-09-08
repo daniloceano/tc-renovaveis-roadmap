@@ -217,6 +217,42 @@ export const modules: Module[] = [
     links: [],
     tasks: [
       {
+        id: 'rotinas-pre-processamento',
+        title: 'Rotinas de pré-processamento',
+        status: 'done',
+        type: 'software',
+        description:
+          'Rotinas de pré-processamento das condições iniciais e de contorno, incluindo download e conversão de GFS, OISST e ERA5, além da preparação dos campos estáticos (uso do solo, topografia) para o init_atmosphere do MPAS.',
+        tags: ['MPAS', 'pré-processamento', 'GFS', 'OISST', 'ERA5'],
+      },
+      {
+        id: 'rotinas-instalacao-build',
+        title: 'Rotinas de instalação e build',
+        status: 'done',
+        type: 'software',
+        description:
+          'Pipeline de instalação das bibliotecas e build do MPAS, com scripts e documentação guiada para configuração do ambiente de pré/pós-processamento.',
+        tags: ['MPAS', 'instalação', 'build'],
+      },
+      {
+        id: 'rotinas-criacao-malha',
+        title: 'Rotinas de criação de malha',
+        status: 'in-progress',
+        type: 'software',
+        description:
+          'Rotinas para criação facilitada de malhas regionais e de resolução variável, incluindo zona de buffer na fronteira lateral.',
+        tags: ['MPAS', 'malha', 'grid'],
+      },
+      {
+        id: 'rotinas-visualizacao',
+        title: 'Rotinas de visualização',
+        status: 'in-progress',
+        type: 'software',
+        description:
+          'Ferramentas unificadas de visualização e animação da malha nativa do MPAS, incluindo cortes verticais dos campos simulados.',
+        tags: ['MPAS', 'visualização', 'pós-processamento'],
+      },
+      {
         id: 'simulacao-teste-meq',
         title: 'Simulação teste: MEq',
         status: 'done',
@@ -226,13 +262,22 @@ export const modules: Module[] = [
         tags: ['MPAS', 'simulação', 'mesoescala'],
       },
       {
-        id: 'calibracao-do-modelo',
-        title: 'Calibração do modelo',
+        id: 'experimentos-meqbr-05km',
+        title: 'Experimentos de sensibilidade — MeqBr 5km',
+        status: 'done',
+        type: 'results',
+        description:
+          'Rodada de experimentos de sensibilidade no domínio MeqBr ~5km (CTL, EXP01, EXP02), avaliando o efeito da atualização de TSM via OISST e do tratamento da fronteira lateral (malha com zona de buffer) na representação do escoamento simulado.',
+        tags: ['MPAS', 'MeqBr', 'experimentos', 'OISST'],
+      },
+      {
+        id: 'refazer-simulacoes-oisst',
+        title: 'Refazer simulações após correção da interpolação do OISST',
         status: 'in-progress',
         type: 'results',
         description:
-          'Ajuste de parâmetros do MPAS para melhorar a representação da climatologia de vento sobre o Brasil, com base em comparações com dados observacionais.',
-        tags: ['MPAS', 'calibração', 'climatologia'],
+          'Re-execução dos experimentos no domínio MeqBr 5km após identificação e correção de um problema na rotina de interpolação dos dados de TSM do OISST.',
+        tags: ['MPAS', 'MeqBr', 'OISST', 'correção'],
       },
       {
         id: 'simulacoes-time-slices-meqbr',
@@ -300,6 +345,15 @@ export const modules: Module[] = [
         description:
           'Desenvolvimento de um monitor interativo de ciclones extratropicais do Atlântico Sul, permitindo visualização de trajetórias, intensidade e características energéticas dos sistemas.',
         tags: ['ciclones', 'Atlântico Sul', 'monitoramento'],
+      },
+      {
+        id: 'migracao-monitor-master',
+        title: 'Migração do monitor para o servidor do MASTER',
+        status: 'in-progress',
+        type: 'software',
+        description:
+          'Migração do monitor de ciclones extratropicais do Atlântico Sul para infraestrutura própria no servidor do laboratório MASTER/IAG-USP.',
+        tags: ['ciclones', 'monitor', 'infraestrutura'],
       },
       {
         id: 'artigo-energy-patterns',
@@ -402,6 +456,25 @@ export const modules: Module[] = [
         description:
           'Correção de viés dos dados de reanálise ERA5 seguida de análise de valores extremos para recursos de vento e ondas sob cenários climáticos futuros.',
         tags: ['ERA5', 'correção de viés', 'extremos', 'mudanças climáticas'],
+      },
+    ],
+  },
+  {
+    id: 'otec',
+    title: 'Caracterização de OTEC',
+    icon: '🔋',
+    description:
+      'Avaliação do potencial de conversão de energia térmica oceânica (OTEC) na costa brasileira, a partir do gradiente vertical de temperatura da coluna d\'água.',
+    links: [],
+    tasks: [
+      {
+        id: 'caracterizacao-inicial-otec',
+        title: 'Caracterização inicial',
+        status: 'done',
+        type: 'results',
+        description:
+          'Caracterização inicial do potencial de conversão de energia térmica oceânica (OTEC) para a costa brasileira.',
+        tags: ['OTEC', 'energia oceânica'],
       },
     ],
   },
