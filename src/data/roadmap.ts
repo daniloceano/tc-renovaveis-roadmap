@@ -356,6 +356,24 @@ export const modules: Module[] = [
         tags: ['ciclones', 'monitor', 'infraestrutura'],
       },
       {
+        id: 'cyclophaser-v2',
+        title: 'Cyclophaser v2',
+        status: 'in-progress',
+        type: 'software',
+        description:
+          'Desenvolvimento da versão 2 do Cyclophaser, uma ferramenta para análise do ciclo de vida de ciclones extratropicais, incluindo melhorias na interface e novas funcionalidades.',
+        tags: ['ciclones', 'Atlântico Sul', 'software'],
+      },
+      {
+        id: 'refazer-analise-energia-ciclones',
+        title: 'Refazer análise de energia dos ciclones',
+        status: 'in-progress',
+        type: 'results',
+        description:
+          'Refazer a análise de energia dos ciclones extratropicais do Atlântico Sul, após correção de bugs no LorenzCycleToolKit.',
+        tags: ['ciclones', 'Atlântico Sul', 'análise'],
+      },
+      {
         id: 'artigo-energy-patterns',
         title: 'Energy Patterns',
         status: 'in-progress',
