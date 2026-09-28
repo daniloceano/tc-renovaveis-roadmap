@@ -94,19 +94,10 @@ export const modules: Module[] = [
         id: 'artigo-offshore',
         title: 'Ajuste para todos os pontos offshore do Brasil',
         status: 'done',
-        type: 'article',
+        type: 'results',
         description:
           'Manuscrito científico caracterizando distribuições de velocidade do vento em todos os pontos de grade offshore brasileiros com reanálise ERA5, cobrindo múltiplas famílias de distribuições via MagicA AutoFitter.',
         tags: ['vento', 'offshore', 'MagicA', 'ERA5'],
-      },
-      {
-        id: 'incorporar-amex',
-        title: 'Incorporar rotinas - AMEX',
-        status: 'planned',
-        type: 'software',
-        description:
-          'Integração das rotinas do projeto AMEX para análise conjunta de extrmos.',
-        tags: ['vento', 'AMEX', 'integração'],
       },
     ],
   },
@@ -139,6 +130,24 @@ export const modules: Module[] = [
         description:
           'Desenvolvimento do frontend para o pacote MagicA, permitindo interação visual com os resultados do ajuste estatístico de distribuições de vento.',
         tags: ['MagicA', 'frontend'],
+      },
+      {
+        id: 'executavel-magica-v1',
+        title: 'Executável - MagicA v1',
+        status: 'in-progress',
+        type: 'software',
+        description:
+          'Desenvolvimento de uma versão executável inicial para o pacote MagicA, permitindo interação visual com os resultados do ajuste estatístico de distribuições de vento.',
+        tags: ['MagicA', 'executável'],
+      },
+      {
+        id: 'leitura-lidar-zephyr',
+        title: 'Leitura de dados de LiDAR',
+        status: 'planned',
+        type: 'software',
+        description:
+          'Incorporação de rotinas para leitura e processamento de dados de LiDAR, integrando-os ao frontend.',
+        tags: ['LiDAR', 'leitura', 'processamento'],
       },
       {
         id: 'incorporar-windlab',
@@ -226,6 +235,15 @@ export const modules: Module[] = [
         tags: ['MPAS', 'pré-processamento', 'GFS', 'OISST', 'ERA5'],
       },
       {
+        id: 'refazer-simulacoes-oisst',
+        title: 'Refazer simulações após correção da interpolação do OISST',
+        status: 'done',
+        type: 'article',
+        description:
+          'Re-execução dos experimentos no domínio MeqBr 5km após identificação e correção de um problema na rotina de interpolação dos dados de TSM do OISST.',
+        tags: ['MPAS', 'MeqBr', 'OISST', 'correção'],
+      },
+      {
         id: 'rotinas-instalacao-build',
         title: 'Rotinas de instalação e build',
         status: 'done',
@@ -264,20 +282,11 @@ export const modules: Module[] = [
       {
         id: 'experimentos-meqbr-05km',
         title: 'Experimentos de sensibilidade — MeqBr 5km',
-        status: 'done',
+        status: 'in-progress',
         type: 'results',
         description:
           'Rodada de experimentos de sensibilidade no domínio MeqBr ~5km (CTL, EXP01, EXP02), avaliando o efeito da atualização de TSM via OISST e do tratamento da fronteira lateral (malha com zona de buffer) na representação do escoamento simulado.',
         tags: ['MPAS', 'MeqBr', 'experimentos', 'OISST'],
-      },
-      {
-        id: 'refazer-simulacoes-oisst',
-        title: 'Refazer simulações após correção da interpolação do OISST',
-        status: 'in-progress',
-        type: 'article',
-        description:
-          'Re-execução dos experimentos no domínio MeqBr 5km após identificação e correção de um problema na rotina de interpolação dos dados de TSM do OISST.',
-        tags: ['MPAS', 'MeqBr', 'OISST', 'correção'],
       },
       {
         id: 'simulacoes-time-slices-meqbr',
