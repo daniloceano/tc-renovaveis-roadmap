@@ -281,23 +281,27 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .add-row { margin-top: 12px; }
 .note { font-size: 12px; color: var(--dim); font-style: italic; margin-top: 24px; }
 
-/* ── Tela de conexão ───────────────────────────────────────────── */
+/* ── Tela de carregamento / erro inicial ───────────────────────────────────────────── */
 .connect { max-width: 440px; margin: 48px auto; padding: 0 16px; }
 .connect .logos { display: flex; justify-content: center; margin: 0 auto 24px; width: fit-content; }
 .connect-card { background: var(--panel); border: 1px solid var(--border-2); border-radius: 12px; padding: 22px; }
 .connect h1 { font-size: 20px; color: #fff; margin: 4px 0 6px; }
 .connect p { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
-.connect form { display: flex; flex-direction: column; gap: 10px; }
-.connect input {
-  width: 100%; background: var(--panel-2); border: 1px solid var(--border-2); border-radius: 8px;
-  padding: 10px 12px; color: #fff; outline: none; font-family: ui-monospace, Menlo, monospace; font-size: 13px;
-}
-.connect input:focus { border-color: var(--blue-btn-h); }
-.connect .btn { justify-content: center; padding: 10px; font-size: 13px; }
-.connect details { margin-top: 16px; font-size: 12px; color: var(--muted); }
-.connect details ol { padding-left: 18px; margin: 8px 0 0; }
-.connect details li { margin-bottom: 4px; }
-.connect code { color: var(--text-2); }
 .connect .msg { font-size: 12px; color: var(--red); margin: 0; }
 
 .footer { border-top: 1px solid var(--border); padding: 18px 0; margin-top: 40px; font-size: 12px; color: var(--dim); }
+
+/* ── Diálogo de autenticação (só ao salvar) ────────────────────── */
+.dialog {
+  width: min(460px, calc(100vw - 32px)); padding: 0; border: 1px solid var(--border-2); border-radius: 12px;
+  background: var(--panel); color: var(--text);
+}
+.dialog::backdrop { background: rgba(2, 6, 23, .7); }
+.dialog form { display: flex; flex-direction: column; gap: 12px; padding: 20px; }
+.dialog h2 { margin: 0; font-size: 17px; color: #fff; }
+.dialog p { margin: 0; font-size: 13px; color: var(--muted); }
+.dialog details { font-size: 12px; color: var(--muted); }
+.dialog details ol { padding-left: 18px; margin: 8px 0 0; }
+.dialog code { color: var(--text-2); }
+.pill-branch { color: var(--amber); border-color: #b45309; }
+.connect .msg + .btn { margin-top: 12px; }

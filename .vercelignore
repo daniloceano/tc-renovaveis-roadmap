@@ -1,5 +1,6 @@
-# Somente a interface é publicada. Os dados (tasks.json) NÃO vão para o site:
-# são lidos do GitHub com o token de cada usuário.
+# Somente a interface é publicada. O tasks.json fica de fora para que o site
+# nunca sirva uma cópia congelada no deploy: os dados são sempre lidos do GitHub.
+# (Isto não é mecanismo de privacidade: o repositório é público.)
 tasks.json
 README.md
 docs/
