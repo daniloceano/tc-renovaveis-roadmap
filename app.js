@@ -240,7 +240,8 @@
   // Leitura: auth=false (pública). Gravação: auth=true (exige token).
   async function api(method, body, auth) {
     let url = `${CONFIG.apiBase}/repos/${repoName}/contents/${CONFIG.path}`;
-    if (method === 'GET') url += `?ref=${encodeURIComponent(CONFIG.branch)}`;
+    // `_` evita o cache do CDN do GitHub nas leituras anônimas (sem ele, medimos até ~20 s de atraso).
+    if (method === 'GET') url += `?ref=${encodeURIComponent(CONFIG.branch)}&_=${Date.now()}`;
     const headers = { Accept: 'application/vnd.github+json' };
     if (auth) headers.Authorization = `Bearer ${token}`;
     if (body) headers['Content-Type'] = 'application/json';

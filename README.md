@@ -30,9 +30,9 @@ Navegador  ───────────────────────
   site publicado ([`.vercelignore`](.vercelignore)) para que a página nunca mostre uma cópia congelada no deploy.
   Isso não é proteção de privacidade: o arquivo é público no repositório.
 - **Não há backend.** O token, quando usado, vai somente para `api.github.com`.
-- **Atualização entre computadores:** cada abertura e cada *Puxar atualizações* consultam o GitHub. A API anônima
-  pode servir uma resposta com até ~60 s de atraso logo após um salvamento feito em outro computador. Mesmo assim,
-  a detecção de conflito ao salvar é sempre feita com a versão real.
+- **Atualização entre computadores:** cada abertura e cada *Puxar atualizações* consultam o GitHub, contornando o cache
+  do CDN dele. Assim, um salvamento feito em outro computador aparece imediatamente. A detecção de conflito ao salvar é
+  sempre feita com a versão real.
 - **Limite da API:** sem token, o GitHub permite 60 consultas por hora por endereço IP, o que basta para uso normal.
   Se a cota acabar, a página lê o arquivo pelo CDN `raw.githubusercontent.com`, que pode atrasar alguns minutos, e o
   indicador mostra *"Sincronizado (via CDN)"*.
@@ -215,7 +215,7 @@ Existe o branch de teste `teste-gravacao-roadmap`, com uma cópia do `tasks.json
 2. **Salvar:** mude o status de uma tarefa → *Salvar no GitHub* → cole o token → aguarde *"Salvo no GitHub ✓"* e
    clique em *ver commit*.
 3. **Puxar:** em outro computador ou navegador, abra o mesmo endereço (ou clique em *Puxar atualizações*). A mudança
-   deve aparecer (pode levar até ~1 min).
+   deve aparecer.
 4. **Conflito:** abra o endereço em duas abas. Salve uma alteração na aba A; depois altere e salve na aba B. A aba B
    deve mostrar *"Conflito detectado"* sem sobrescrever o que a aba A salvou.
 5. **Resetar:** faça uma alteração e clique em *Resetar alterações*. A tela volta ao último estado salvo, e nada
