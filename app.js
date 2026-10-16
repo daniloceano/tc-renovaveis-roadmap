@@ -1,22 +1,21 @@
 /*
  * TC-Renováveis Roadmap — aplicação estática (HTML + CSS + JS, sem build).
  *
- * Fonte de verdade: o arquivo tasks.json no repositório GitHub (público), acessado
- * diretamente pela API REST de conteúdo do GitHub:
- *   GET  /repos/{owner}/{repo}/contents/{path}?ref={branch}  → conteúdo + SHA (sem token)
- *   PUT  /repos/{owner}/{repo}/contents/{path}               → commit (exige token e o SHA anterior)
- * Se o SHA enviado não for o atual, o GitHub responde 409 e nada é sobrescrito.
- * Se a cota anônima da API (60 req/h por IP) acabar, a leitura recorre a
- * raw.githubusercontent.com (CDN, pode atrasar alguns minutos).
+ * Fonte de verdade: o arquivo tasks.json no repositório GitHub (público).
+ *   Leitura: direto da API REST do GitHub, sem autenticação
+ *            (GET /repos/{owner}/{repo}/contents/tasks.json?ref={branch} → conteúdo + SHA).
+ *            Se a cota anônima (60 req/h por IP) acabar, recorre a raw.githubusercontent.com.
+ *   Escrita: POST /api/save (função serverless na Vercel), que exige a sessão aberta com a
+ *            senha de edição (POST /api/login) e grava no GitHub com o SHA anterior.
+ *            Se o arquivo mudou no GitHub, a resposta é 409 e nada é sobrescrito.
  *
- * O token só é pedido ao salvar e fica apenas na variável `token` (memória da aba).
- * Ele nunca é gravado em localStorage, sessionStorage, cookies, URL ou console.
+ * Esta página nunca vê o token do GitHub nem guarda a senha: a sessão é um cookie HttpOnly.
  */
 'use strict';
 
 (() => {
   // ── Configuração ─────────────────────────────────────────────────────────
-  // ?branch=<nome> permite ler/gravar outro branch (ex.: testes de gravação).
+  // ?branch=<nome> permite consultar outro branch. O branch de gravação é decidido pelo servidor.
   const branchParam = new URLSearchParams(location.search).get('branch');
   const CONFIG = {
     apiBase: 'https://api.github.com',
@@ -68,7 +67,7 @@
   };
 
   // ── Estado ────────────────────────────────────────────────────────────────
-  let token = null;        // somente em memória; usado apenas para gravar
+  let server = null;       // estado de /api/session: { configured, writeBranch, authenticated, expiresAt }
   let data = null;         // estado editável (o que a interface mostra)
   let baseText = null;     // serialização da última versão carregada/salva no GitHub
   let remoteSha = null;    // SHA (blob git) do tasks.json correspondente a baseText
@@ -79,7 +78,6 @@
   let conflict = false;    // o GitHub recusou a gravação por versão desatualizada
   let justSaved = false;   // exibe "Salvo" por alguns segundos
   let viaCdn = false;      // última leitura veio do CDN (cota da API esgotada)
-  let rememberToken = false;
   const ui = { editTask: null, editTaskModule: null, editModule: null, formError: '' };
 
   const $ = (id) => document.getElementById(id);
@@ -94,12 +92,6 @@
   const hhmm = (d) => d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
   const pl = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
-  function b64encode(str) {
-    const bytes = new TextEncoder().encode(str);
-    let bin = '';
-    for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
-    return btoa(bin);
-  }
   function b64decode(b64) {
     const bin = atob(b64.replace(/\s/g, ''));
     return new TextDecoder('utf-8').decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
@@ -119,16 +111,18 @@
   const allTaskIds = () => new Set(data.modules.flatMap((m) => m.tasks.map((t) => t.id)));
 
   // Ordem canônica dos campos (mantém o tasks.json previsível e com diffs limpos)
-  function normTask(t) {
+  // `prev` é a versão anterior do item: campos opcionais que já existiam (mesmo vazios) são mantidos,
+  // para que editar uma tarefa não altere outras partes do arquivo.
+  function normTask(t, prev = {}) {
     const o = { id: t.id, title: t.title, status: t.status, type: t.type, description: t.description ?? '' };
-    if (t.links && t.links.length) o.links = t.links;
-    if (t.tags && t.tags.length) o.tags = t.tags;
+    if ((t.links && t.links.length) || Array.isArray(prev.links)) o.links = t.links || [];
+    if ((t.tags && t.tags.length) || Array.isArray(prev.tags)) o.tags = t.tags || [];
     return o;
   }
-  function normModule(m) {
+  function normModule(m, prev = {}) {
     const o = { id: m.id, title: m.title, icon: m.icon, description: m.description ?? '' };
-    if (m.discontinued) o.discontinued = true;
-    if (m.links && m.links.length) o.links = m.links;
+    if (m.discontinued || prev.discontinued !== undefined) o.discontinued = !!m.discontinued;
+    if ((m.links && m.links.length) || Array.isArray(prev.links)) o.links = m.links || [];
     o.tasks = m.tasks;
     return o;
   }
@@ -215,7 +209,7 @@
     return parts.length ? parts.join(', ') : 'reordenação';
   }
 
-  // ── API do GitHub ─────────────────────────────────────────────────────────
+  // ── Leitura pública (API do GitHub, sem autenticação) ─────────────────────
   class SyncError extends Error {
     constructor(message, kind) { super(message); this.kind = kind; }
   }
@@ -237,36 +231,15 @@
     return `Cota da API do GitHub esgotada${reset ? ` (renova às ${hhmm(new Date(reset * 1000))})` : ''}.`;
   }
 
-  // Leitura: auth=false (pública). Gravação: auth=true (exige token).
-  async function api(method, body, auth) {
-    let url = `${CONFIG.apiBase}/repos/${repoName}/contents/${CONFIG.path}`;
+  async function githubGet() {
     // `_` evita o cache do CDN do GitHub nas leituras anônimas (sem ele, medimos até ~20 s de atraso).
-    if (method === 'GET') url += `?ref=${encodeURIComponent(CONFIG.branch)}&_=${Date.now()}`;
-    const headers = { Accept: 'application/vnd.github+json' };
-    if (auth) headers.Authorization = `Bearer ${token}`;
-    if (body) headers['Content-Type'] = 'application/json';
-    const res = await request(url, { method, headers, body: body ? JSON.stringify(body) : undefined });
+    const url = `${CONFIG.apiBase}/repos/${repoName}/contents/${CONFIG.path}?ref=${encodeURIComponent(CONFIG.branch)}&_=${Date.now()}`;
+    const res = await request(url, { headers: { Accept: 'application/vnd.github+json' } });
     if (res.ok) return res;
-    let msg = '';
-    try { msg = (await res.json()).message || ''; } catch { /* corpo vazio */ }
     if (isRateLimited(res)) throw new SyncError(`${rateLimitMsg(res)} Tente novamente mais tarde.`, 'rate');
-    switch (res.status) {
-      case 401:
-        throw new SyncError('Token inválido ou expirado (GitHub 401).', 'auth');
-      case 403:
-        throw new SyncError(
-          `Sem permissão para gravar (GitHub 403). O token precisa de "Contents: Read and write" no repositório ${repoName}.`, 'auth');
-      case 404:
-        if (method === 'GET')
-          throw new SyncError(`${CONFIG.path} não encontrado no branch "${CONFIG.branch}" de ${repoName} (GitHub 404).`, 'notfound');
-        throw new SyncError(
-          `GitHub 404 ao gravar: o token não tem acesso a ${repoName} ou o branch "${CONFIG.branch}" não existe.`, 'auth');
-      case 409:
-        throw new SyncError('conflict', 'conflict');
-      case 422:
-        if (/sha/i.test(msg)) throw new SyncError('conflict', 'conflict');
-    }
-    throw new SyncError(`Erro do GitHub (${res.status})${msg ? ': ' + msg : ''}.`, 'http');
+    if (res.status === 404)
+      throw new SyncError(`${CONFIG.path} não encontrado no branch "${CONFIG.branch}" de ${repoName} (GitHub 404).`, 'notfound');
+    throw new SyncError(`Erro do GitHub ao ler os dados (HTTP ${res.status}).`, 'http');
   }
 
   function parseRemote(text, sha) {
@@ -293,12 +266,10 @@
   async function fetchRemote() {
     let res;
     try {
-      res = await api('GET', null, false);
+      res = await githubGet();
     } catch (e) {
       if (e.kind !== 'rate') throw e;
-      // Cota anônima esgotada: usa o token, se houver; senão, o CDN raw.githubusercontent.com.
-      res = token ? await api('GET', null, true).catch(() => null) : null;
-      if (!res) return fetchFromCdn(e.message);
+      return fetchFromCdn(e.message); // cota anônima esgotada: lê pelo raw.githubusercontent.com
     }
     const j = await res.json();
     if (j.encoding !== 'base64' || typeof j.content !== 'string')
@@ -315,6 +286,36 @@
     viaCdn = true;
     return parseRemote(text, await gitBlobSha(text));
   }
+
+  // ── Servidor do roadmap (/api): sessão e gravação ─────────────────────────
+  // A senha só vai para /api/login; a sessão fica num cookie HttpOnly que esta página não lê.
+  async function apiCall(path, method, body) {
+    let res;
+    try {
+      res = await fetch(path, {
+        method,
+        cache: 'no-store',
+        credentials: 'same-origin',
+        headers: body ? { 'Content-Type': 'application/json' } : {},
+        body: body ? JSON.stringify(body) : undefined,
+      });
+    } catch {
+      throw new SyncError('Falha de rede: não foi possível contatar o servidor do roadmap.', 'network');
+    }
+    let j = {};
+    try { j = await res.json(); } catch { /* resposta sem JSON (ex.: bloqueio do firewall) */ }
+    if (res.ok) return j;
+    if (res.status === 429) throw new SyncError('Muitas tentativas. Aguarde alguns minutos e tente novamente.', 'rate');
+    const kind = res.status === 401 ? (j.code === 'bad_password' ? 'bad_password' : 'auth')
+      : res.status === 409 && j.code === 'conflict' ? 'conflict'
+      : res.status === 503 ? 'not_configured' : 'server';
+    throw new SyncError(j.error || `Erro do servidor (HTTP ${res.status}).`, kind);
+  }
+
+  async function fetchServer() {
+    try { server = await apiCall('/api/session', 'GET'); } catch { server = null; }
+  }
+  const sessionValid = () => !!(server && server.authenticated && server.expiresAt > Date.now());
 
   // ── Ações de sincronização ────────────────────────────────────────────────
   async function loadRemote() {
@@ -348,35 +349,38 @@
       lastError = `Os dados têm problemas e não foram enviados: ${errs.join('; ')}.`;
       return render();
     }
-    if (!token) return openAuth();
-    const text = serialize(data);
-    const message = `Atualiza tarefas do roadmap: ${changeSummary()}`;
+    if (!server || !server.configured) {
+      lastError = 'O salvamento não está disponível neste endereço (servidor não configurado).';
+      return render();
+    }
+    if (server.writeBranch !== CONFIG.branch) {
+      lastError = `Este endereço grava somente no branch "${server.writeBranch}", mas a página mostra "${CONFIG.branch}". Abra o roadmap sem "?branch=" para salvar.`;
+      return render();
+    }
+    if (!sessionValid()) return openAuth();
+    const sent = serialize(data);
     let authFailure = null;
     busy = 'saving';
     render();
     try {
-      const j = await (await api('PUT', {
-        message, content: b64encode(text), sha: remoteSha, branch: CONFIG.branch,
-      }, true)).json();
-      remoteSha = j.content.sha;
-      baseText = text;
+      const r = await apiCall('/api/save', 'POST', { data, sha: remoteSha, branch: CONFIG.branch, summary: changeSummary() });
+      remoteSha = r.sha;
+      baseText = sent;
       syncedAt = new Date();
       lastError = null;
       conflict = false;
       justSaved = true;
       setTimeout(() => { justSaved = false; updateSyncBar(); }, 5000);
-      toast(`Salvo no GitHub — commit ${String(j.commit.sha).slice(0, 7)}`, j.commit.html_url);
-      if (rememberToken) offerToStoreToken();
+      toast(`Salvo no GitHub — commit ${String(r.commit.sha).slice(0, 7)}`, r.commit.url);
     } catch (e) {
       if (e.kind === 'auth') {
-        token = null;
+        server.authenticated = false;
         authFailure = e.message;
       } else {
         handleError(e);
       }
     } finally {
       busy = null;
-      rememberToken = false;
       render();
     }
     if (authFailure) openAuth(authFailure);
@@ -400,13 +404,6 @@
     toast('Alterações locais descartadas.');
   }
 
-  function forgetToken() {
-    token = null;
-    $('auth-form').elements.token.value = '';
-    render();
-    toast('Token removido desta página.');
-  }
-
   function handleError(e) {
     if (!(e instanceof SyncError)) e = new SyncError(`Erro inesperado: ${e && e.message}`, 'other');
     if (!data) loadError = e.message;
@@ -414,23 +411,47 @@
     else lastError = e.message;
   }
 
-  // ── Autenticação (somente para gravar) ────────────────────────────────────
+  // ── Autorização para edição (senha) ───────────────────────────────────────
   function openAuth(msg) {
     const err = $('auth-error');
     err.textContent = msg || '';
     err.hidden = !msg;
-    $('auth-form').elements.token.value = '';
+    $('auth-form').elements.password.value = '';
     $('auth-dialog').showModal();
   }
 
-  // Opcional: pede ao navegador (Chrome/Edge) para guardar o token no gerenciador de senhas.
-  // Em outros navegadores, os atributos autocomplete do formulário permitem o preenchimento automático.
-  function offerToStoreToken() {
-    if (!window.PasswordCredential || !navigator.credentials) return;
-    const user = $('auth-form').elements.username.value.trim() || CONFIG.owner;
-    navigator.credentials
-      .store(new PasswordCredential({ id: user, password: token, name: 'Token GitHub — TC-Renováveis Roadmap' }))
-      .catch(() => { /* recusado pelo usuário ou não suportado */ });
+  async function login(form) {
+    const password = form.elements.password.value;
+    if (!password) return;
+    const button = form.querySelector('button[type=submit]');
+    const err = $('auth-error');
+    button.disabled = true;
+    err.hidden = true;
+    try {
+      const r = await apiCall('/api/login', 'POST', { password });
+      server = { ...server, authenticated: true, expiresAt: r.expiresAt };
+      form.elements.password.value = '';
+      $('auth-dialog').close();
+      await save();
+    } catch (e) {
+      form.elements.password.value = '';
+      err.textContent = e.message;
+      err.hidden = false;
+      form.elements.password.focus();
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  async function logout() {
+    try {
+      await apiCall('/api/logout', 'POST', {});
+    } catch (e) {
+      return toast(e.message);
+    }
+    if (server) server.authenticated = false;
+    render();
+    toast('Sessão de edição encerrada.');
   }
 
   function downloadLocal() {
@@ -464,7 +485,7 @@
     $('btn-save').disabled = !data || !!busy || !dirty;
     $('btn-pull').disabled = !!busy;
     $('btn-reset').disabled = !data || !!busy || !dirty;
-    $('btn-logout').hidden = !token;
+    $('btn-logout').hidden = !sessionValid();
     const badge = $('branch-badge');
     badge.hidden = CONFIG.branch === 'main';
     badge.textContent = `branch: ${CONFIG.branch}`;
@@ -543,7 +564,7 @@
       const d = draft[formKey(form)];
       if (!d) return;
       for (const f of form.querySelectorAll('[name]')) {
-        if (!(f.name in d) || f.name === 'token') continue;
+        if (!(f.name in d)) continue;
         if (f.type === 'checkbox') f.checked = d[f.name]; else f.value = d[f.name];
       }
     });
@@ -755,7 +776,7 @@
       return;
     }
     const found = findTask(id);
-    const task = normTask({ ...found.task, ...fields });
+    const task = normTask({ ...found.task, ...fields }, found.task);
     if (found.mod === target) found.mod.tasks[found.i] = task;
     else { found.mod.tasks.splice(found.i, 1); target.tasks.push(task); }
   }
@@ -778,7 +799,7 @@
       return newId;
     }
     const i = data.modules.findIndex((m) => m.id === id);
-    data.modules[i] = normModule({ ...data.modules[i], ...fields });
+    data.modules[i] = normModule({ ...data.modules[i], ...fields }, data.modules[i]);
     return id;
   }
 
@@ -858,16 +879,10 @@
   $('btn-save').addEventListener('click', save);
   $('btn-pull').addEventListener('click', pull);
   $('btn-reset').addEventListener('click', reset);
-  $('btn-logout').addEventListener('click', forgetToken);
+  $('btn-logout').addEventListener('click', logout);
   $('auth-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    const f = e.target.elements;
-    const value = f.token.value.trim();
-    if (!value) return;
-    token = value;
-    rememberToken = f.remember.checked;
-    $('auth-dialog').close();
-    save();
+    login(e.target);
   });
   $('auth-cancel').addEventListener('click', () => $('auth-dialog').close());
 
@@ -880,6 +895,11 @@
   const legacy = new URLSearchParams(location.search).get('modulo');
   if (legacy) history.replaceState(null, '', `${location.pathname}#/module/${encodeURIComponent(legacy)}`);
 
+  // Início: descobre em qual branch este endereço grava (produção: main; preview: branch de teste)
+  // e carrega os dados desse branch, salvo se ?branch= pedir outro para consulta.
   render();
-  loadRemote();
+  fetchServer().then(() => {
+    if (!branchParam && server && server.writeBranch) CONFIG.branch = server.writeBranch;
+    return loadRemote();
+  });
 })();

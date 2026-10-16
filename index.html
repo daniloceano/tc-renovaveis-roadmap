@@ -21,7 +21,7 @@
         <button class="btn btn-primary" id="btn-save" disabled>Salvar no GitHub</button>
         <button class="btn" id="btn-pull" disabled>Puxar atualizações</button>
         <button class="btn" id="btn-reset" disabled>Resetar alterações</button>
-        <button class="btn btn-ghost" id="btn-logout" hidden title="Remove o token da memória desta página">Esquecer token</button>
+        <button class="btn btn-ghost" id="btn-logout" hidden title="Encerra a sessão de edição neste navegador">Encerrar sessão</button>
         <span class="pill pill-branch" id="branch-badge" hidden></span>
       </div>
     </div>
@@ -34,29 +34,16 @@
     <div class="wrap">TC No. 050.0125966.23.9 · PETROBRAS/CENPES × IAG-USP</div>
   </footer>
 
-  <!-- Autenticação: aparece apenas ao salvar. A leitura é pública. -->
+  <!-- Autorização: aparece apenas ao salvar. A consulta é pública. -->
   <dialog class="dialog" id="auth-dialog" aria-labelledby="auth-title">
-    <form id="auth-form" method="dialog">
-      <h2 id="auth-title">Autenticar para salvar no GitHub</h2>
-      <p>Qualquer pessoa pode ver o roadmap; para <strong>gravar</strong> é preciso um token do GitHub com permissão de escrita neste repositório.
-        O token fica só na memória desta aba.</p>
-      <label class="field"><span>Usuário GitHub</span>
-        <input name="username" autocomplete="username" value="daniloceano" spellcheck="false"></label>
-      <label class="field"><span>Token (fine-grained)</span>
-        <input type="password" name="token" autocomplete="current-password" placeholder="github_pat_…" spellcheck="false" required autofocus></label>
-      <label class="check"><input type="checkbox" name="remember"> Oferecer para guardar no gerenciador de senhas do navegador (só em computador pessoal)</label>
+    <form id="auth-form">
+      <h2 id="auth-title">Autorização para edição</h2>
+      <p>Informe sua senha de edição para salvar alterações no GitHub.</p>
+      <label class="field"><span>Senha de edição</span>
+        <input type="password" name="password" autocomplete="current-password" spellcheck="false" maxlength="256" required autofocus></label>
       <p class="form-error" id="auth-error" role="alert" hidden></p>
-      <details>
-        <summary>Como criar o token</summary>
-        <ol>
-          <li>GitHub → <em>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</em>.</li>
-          <li><em>Repository access</em>: <strong>Only select repositories</strong> → <code>daniloceano/tc-renovaveis-roadmap</code>.</li>
-          <li><em>Permissions → Repository → Contents</em>: <strong>Read and write</strong>. Nada mais.</li>
-          <li>Defina uma validade (ex.: 90 dias), gere e cole acima.</li>
-        </ol>
-      </details>
       <div class="form-actions">
-        <button class="btn btn-primary" type="submit">Salvar no GitHub</button>
+        <button class="btn btn-primary" type="submit">Autorizar e salvar</button>
         <button class="btn" type="button" id="auth-cancel">Cancelar</button>
       </div>
     </form>
