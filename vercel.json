@@ -1,0 +1,23 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "",
+  "installCommand": "",
+  "ignoreCommand": "if git diff --quiet HEAD^ HEAD -- . ':(exclude)tasks.json'; then exit 0; else exit 1; fi",
+  "redirects": [
+    { "source": "/module/:id", "destination": "/?modulo=:id", "permanent": false },
+    { "source": "/login", "destination": "/", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.github.com https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" },
+        { "key": "Referrer-Policy", "value": "no-referrer" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "Cache-Control", "value": "no-cache" }
+      ]
+    }
+  ]
+}

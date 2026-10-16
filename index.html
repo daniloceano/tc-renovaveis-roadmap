@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TC-Renováveis Roadmap | PETROBRAS × IAG-USP</title>
+  <meta name="description" content="Roadmap do Acordo de Cooperação TC No. 050.0125966.23.9 — Pesquisa em Vento & Ondas, PETROBRAS/CENPES × IAG-USP.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Barra fixa: navegação + sincronização com o GitHub -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a href="#/" class="brand">TC-Renováveis <span>Roadmap</span></a>
+      <div class="sync" id="sync">
+        <span class="pill" id="sync-pill" data-state="loading" role="status" aria-live="polite">
+          <span class="dot"></span><span id="sync-text">Sincronizando…</span>
+        </span>
+        <button class="btn btn-primary" id="btn-save" disabled>Salvar no GitHub</button>
+        <button class="btn" id="btn-pull" disabled>Puxar atualizações</button>
+        <button class="btn" id="btn-reset" disabled>Resetar alterações</button>
+        <button class="btn btn-ghost" id="btn-logout" hidden title="Encerra a sessão de edição neste navegador">Encerrar sessão</button>
+        <span class="pill pill-branch" id="branch-badge" hidden></span>
+      </div>
+    </div>
+    <div class="banner" id="banner" hidden></div>
+  </div>
+
+  <main id="app"></main>
+
+  <footer class="footer">
+    <div class="wrap">TC No. 050.0125966.23.9 · PETROBRAS/CENPES × IAG-USP</div>
+  </footer>
+
+  <!-- Autorização: aparece apenas ao salvar. A consulta é pública. -->
+  <dialog class="dialog" id="auth-dialog" aria-labelledby="auth-title">
+    <form id="auth-form">
+      <h2 id="auth-title">Autorização para edição</h2>
+      <p>Informe sua senha de edição para salvar alterações no GitHub.</p>
+      <label class="field"><span>Senha de edição</span>
+        <input type="password" name="password" autocomplete="current-password" spellcheck="false" maxlength="256" required autofocus></label>
+      <p class="form-error" id="auth-error" role="alert" hidden></p>
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Autorizar e salvar</button>
+        <button class="btn" type="button" id="auth-cancel">Cancelar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
