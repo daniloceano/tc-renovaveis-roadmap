@@ -85,6 +85,13 @@
             "MagicA",
             "ERA5"
           ]
+        },
+        {
+          "id": "definicao-sobre-o-produto-final-cientifico",
+          "title": "Definição sobre o produto final científico",
+          "status": "uncertain",
+          "type": "software",
+          "description": ""
         }
       ]
     },
@@ -109,20 +116,9 @@
       ],
       "tasks": [
         {
-          "id": "frontend-magica",
-          "title": "Frontend - MagicA",
-          "status": "in-progress",
-          "type": "software",
-          "description": "Desenvolvimento do frontend para o pacote MagicA, permitindo interação visual com os resultados do ajuste estatístico de distribuições de vento.",
-          "tags": [
-            "MagicA",
-            "frontend"
-          ]
-        },
-        {
           "id": "executavel-magica-v1",
           "title": "Executável - MagicA v1",
-          "status": "in-progress",
+          "status": "done",
           "type": "software",
           "description": "Desenvolvimento de uma versão executável inicial para o pacote MagicA, permitindo interação visual com os resultados do ajuste estatístico de distribuições de vento.",
           "tags": [
@@ -154,6 +150,46 @@
             "integração",
             "visualização"
           ]
+        },
+        {
+          "id": "pre-processamento-e-qc-de-dados",
+          "title": "Pré-processamento e QC de dados",
+          "status": "planned",
+          "type": "software",
+          "description": "Rotina padronizada de limpeza, filtros e controle de qualidade",
+          "tags": [
+            "leitura",
+            "processamento"
+          ]
+        },
+        {
+          "id": "frontend-magica",
+          "title": "Frontend - Figuras de PR e RL",
+          "status": "planned",
+          "type": "software",
+          "description": "Visualizações interativas de período de retorno (PR) e nível de retorno (RL)",
+          "tags": [
+            "MagicA",
+            "frontend",
+            "visualização"
+          ]
+        },
+        {
+          "id": "frontend-mais-opcoes-de-ajustes",
+          "title": "Frontend - Mais opções de ajustes",
+          "status": "planned",
+          "type": "software",
+          "description": "Ampliar o conjunto de distribuições e opções de ajuste (backend possui 100+)",
+          "tags": [
+            "processamento"
+          ]
+        },
+        {
+          "id": "frontend-pipeline-de-ajuste-estatistico-completo",
+          "title": "Frontend - Pipeline de ajuste estatístico completo",
+          "status": "planned",
+          "type": "software",
+          "description": "Ajuste à seleção automática, simulações de Monte Carlo e segmentação temporal"
         }
       ]
     },
@@ -222,7 +258,7 @@
         },
         {
           "id": "artigo-clustering",
-          "title": "Artigo ?",
+          "title": "Definição sobre o produto final científico",
           "status": "uncertain",
           "type": "article",
           "description": "Possível artigo científico sobre metodologia e resultados de clusterização espacial — escopo e periódico-alvo em discussão com a equipe.",
@@ -236,7 +272,7 @@
     {
       "id": "mpas",
       "title": "MPAS",
-      "icon": "🌀",
+      "icon": "🌐",
       "description": "Downscaling dinâmico da climatologia de vento sobre o Brasil usando o Modelo para Previsão em Múltiplas Escalas (MPAS). Simulações de teste estão sendo realizadas em resolução mesoescala-equatorial antes de comprometer com longas rodadas de produção multi-anuais. O objetivo é uma climatologia de vento simulada em alta resolução para complementar e validar os produtos estatísticos baseados em ERA5.",
       "links": [],
       "tasks": [
@@ -282,7 +318,7 @@
         {
           "id": "rotinas-criacao-malha",
           "title": "Rotinas de criação de malha",
-          "status": "in-progress",
+          "status": "done",
           "type": "software",
           "description": "Rotinas para criação facilitada de malhas regionais e de resolução variável, incluindo zona de buffer na fronteira lateral.",
           "tags": [
@@ -294,7 +330,7 @@
         {
           "id": "rotinas-visualizacao",
           "title": "Rotinas de visualização",
-          "status": "in-progress",
+          "status": "done",
           "type": "software",
           "description": "Ferramentas unificadas de visualização e animação da malha nativa do MPAS, incluindo cortes verticais dos campos simulados.",
           "tags": [
@@ -320,7 +356,7 @@
           "title": "Experimentos de sensibilidade — MeqBr 5km",
           "status": "in-progress",
           "type": "results",
-          "description": "Rodada de experimentos de sensibilidade no domínio MeqBr ~5km (CTL, EXP01, EXP02), avaliando o efeito da atualização de TSM via OISST e do tratamento da fronteira lateral (malha com zona de buffer) na representação do escoamento simulado.",
+          "description": "Rodada de experimentos de sensibilidade no domínio MeqBr ~5km (CTL, EXP01, EXP02, e mais), avaliando o efeito da atualização de TSM via OISST e do tratamento da fronteira lateral (malha com zona de buffer) na representação do escoamento simulado.",
           "tags": [
             "MPAS",
             "MeqBr",
@@ -396,33 +432,9 @@
       ],
       "tasks": [
         {
-          "id": "monitor-ciclones",
-          "title": "Monitor de ciclones",
-          "status": "done",
-          "type": "software",
-          "description": "Desenvolvimento de um monitor interativo de ciclones extratropicais do Atlântico Sul, permitindo visualização de trajetórias, intensidade e características energéticas dos sistemas.",
-          "tags": [
-            "ciclones",
-            "Atlântico Sul",
-            "monitoramento"
-          ]
-        },
-        {
-          "id": "migracao-monitor-master",
-          "title": "Migração do monitor para o servidor do MASTER",
-          "status": "in-progress",
-          "type": "software",
-          "description": "Migração do monitor de ciclones extratropicais do Atlântico Sul para infraestrutura própria no servidor do laboratório MASTER/IAG-USP.",
-          "tags": [
-            "ciclones",
-            "monitor",
-            "infraestrutura"
-          ]
-        },
-        {
           "id": "cyclophaser-v2",
           "title": "Cyclophaser v2",
-          "status": "in-progress",
+          "status": "done",
           "type": "software",
           "description": "Desenvolvimento da versão 2 do Cyclophaser, uma ferramenta para análise do ciclo de vida de ciclones extratropicais, incluindo melhorias na interface e novas funcionalidades.",
           "tags": [
@@ -434,7 +446,7 @@
         {
           "id": "refazer-analise-energia-ciclones",
           "title": "Refazer análise de energia dos ciclones",
-          "status": "in-progress",
+          "status": "done",
           "type": "results",
           "description": "Refazer a análise de energia dos ciclones extratropicais do Atlântico Sul, após correção de bugs no LorenzCycleToolKit.",
           "tags": [
@@ -444,11 +456,23 @@
           ]
         },
         {
+          "id": "monitor-ciclones",
+          "title": "Errata - artigo climatologia do LEC",
+          "status": "in-progress",
+          "type": "article",
+          "description": "Após revisão do LorenzCycleToolKit foram encontrados erros na formulação do LEC. O artigo original foi corrigido e uma errata está em preparação.",
+          "tags": [
+            "ciclones",
+            "Atlântico Sul",
+            "monitoramento"
+          ]
+        },
+        {
           "id": "artigo-energy-patterns",
           "title": "Energy Patterns",
           "status": "in-progress",
           "type": "article",
-          "description": "Desenvolvimento e submissão do artigo sobre os padrões energéticos de ciclones extratropicais do Atlântico Sul.",
+          "description": "https://paper-energy-patterns.vercel.app",
           "tags": [
             "ciclones",
             "Atlântico Sul",
@@ -465,18 +489,6 @@
             "ciclones",
             "Atlântico Sul",
             "vento"
-          ]
-        },
-        {
-          "id": "revisao-bibliografica",
-          "title": "Revisão bibliográfica",
-          "status": "in-progress",
-          "type": "planning",
-          "description": "Revisão da literatura sobre modelos paramétricos de ciclones extratropicais, caracterização do ciclo de vida e energética — com foco nos sistemas do Atlântico Sul.",
-          "tags": [
-            "ciclones",
-            "Atlântico Sul",
-            "literatura"
           ]
         },
         {
@@ -592,6 +604,76 @@
             "OTEC",
             "energia oceânica"
           ]
+        }
+      ]
+    },
+    {
+      "id": "monitor-de-ciclones",
+      "title": "Monitor de Ciclones",
+      "icon": "🌐",
+      "description": "Monitor interativo com tracks históricas (e, futuramente, operacional) de ciclones no Atlântico Sul, incluindo diagramas de fase, energética, ventos extremos associados e mais.",
+      "links": [
+        {
+          "label": "Site Vercel",
+          "url": "https://cyclone-monitor-south-atlantic.vercel.app"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "criacao-da-primeira-versao-do-monitor-no-vercel",
+          "title": "Criação da primeira versão do monitor no Vercel",
+          "status": "done",
+          "type": "software",
+          "description": ""
+        },
+        {
+          "id": "incorporar-cps-e-filtros-relacionados",
+          "title": "Incorporar CPS e filtros relacionados",
+          "status": "done",
+          "type": "software",
+          "description": ""
+        },
+        {
+          "id": "filtros-por-intensidade-e-velocidade-do-vento",
+          "title": "Filtros por intensidade e velocidade do vento",
+          "status": "done",
+          "type": "software",
+          "description": ""
+        },
+        {
+          "id": "adicionar-filtro-por-bacias-sedimentares",
+          "title": "Adicionar filtro por bacias sedimentares",
+          "status": "done",
+          "type": "software",
+          "description": ""
+        },
+        {
+          "id": "migracao-para-site-do-master",
+          "title": "Migração para site do MASTER",
+          "status": "planned",
+          "type": "software",
+          "description": ""
+        },
+        {
+          "id": "refazer-ciclo-de-vida-de-todos-os-ciclones-com-cyc",
+          "title": "Refazer ciclo de vida de todos os ciclones com Cyclophaser v2",
+          "status": "planned",
+          "type": "software",
+          "description": ""
+        },
+        {
+          "id": "adicionar-camada-de-ciclones-bomba",
+          "title": "Adicionar camada de ciclones bomba",
+          "status": "planned",
+          "type": "software",
+          "description": ""
+        },
+        {
+          "id": "artigo-sobre-o-monitor",
+          "title": "Artigo sobre o monitor",
+          "status": "planned",
+          "type": "article",
+          "description": ""
         }
       ]
     }
