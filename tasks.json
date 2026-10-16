@@ -110,7 +110,7 @@
       "tasks": [
         {
           "id": "frontend-magica",
-          "title": "Frontend - MagicA [teste 18:16:28 — ação ✓]",
+          "title": "Frontend - MagicA",
           "status": "in-progress",
           "type": "software",
           "description": "Desenvolvimento do frontend para o pacote MagicA, permitindo interação visual com os resultados do ajuste estatístico de distribuições de vento.",
