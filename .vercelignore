@@ -1,0 +1,9 @@
+# Somente a interface é publicada. Os dados (tasks.json) NÃO vão para o site:
+# são lidos do GitHub com o token de cada usuário.
+tasks.json
+README.md
+docs/
+.git/
+.github/
+node_modules/
+.next/

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TC-Renováveis Roadmap | PETROBRAS × IAG-USP</title>
+  <meta name="description" content="Roadmap do Acordo de Cooperação TC No. 050.0125966.23.9 — Pesquisa em Vento & Ondas, PETROBRAS/CENPES × IAG-USP.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Barra fixa: navegação + sincronização com o GitHub -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a href="#/" class="brand">TC-Renováveis <span>Roadmap</span></a>
+      <div class="sync" id="sync">
+        <span class="pill" id="sync-pill" data-state="disconnected" role="status" aria-live="polite">
+          <span class="dot"></span><span id="sync-text">Desconectado</span>
+        </span>
+        <button class="btn btn-primary" id="btn-save" disabled>Salvar no GitHub</button>
+        <button class="btn" id="btn-pull" disabled>Puxar atualizações</button>
+        <button class="btn" id="btn-reset" disabled>Resetar alterações</button>
+        <button class="btn btn-ghost" id="btn-logout" hidden title="Remove o token desta página">Desconectar</button>
+      </div>
+    </div>
+    <div class="banner" id="banner" hidden></div>
+  </div>
+
+  <main id="app"></main>
+
+  <footer class="footer">
+    <div class="wrap">TC No. 050.0125966.23.9 · PETROBRAS/CENPES × IAG-USP</div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
