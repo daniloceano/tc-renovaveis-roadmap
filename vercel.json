@@ -3,7 +3,7 @@
   "framework": null,
   "buildCommand": "",
   "installCommand": "",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . ':(exclude)tasks.json'",
+  "ignoreCommand": "if git diff --quiet HEAD^ HEAD -- . ':(exclude)tasks.json'; then exit 0; else exit 1; fi",
   "redirects": [
     { "source": "/module/:id", "destination": "/?modulo=:id", "permanent": false },
     { "source": "/login", "destination": "/", "permanent": false }
