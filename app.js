@@ -517,9 +517,9 @@
     : `<span class="chip" title="URL inválida">${esc(l.label)}</span>`).join('');
   const linksToText = (links) => (links || []).map((l) => `${l.label} | ${l.url}`).join('\n');
   const LOGOS = `<div class="logos">
-      <img src="assets/logo-master.png" alt="MASTER — Meteorologia Aplicada a Sistemas de Tempo Regionais">
+      <img class="logo-master" src="assets/logo-master.png" width="402" height="237" alt="MASTER — Meteorologia Aplicada a Sistemas de Tempo Regionais">
       <span class="sep" data-optional-sep></span>
-      <img src="assets/logo-meteo-oceanografia.jpg" alt="Meteorologias em Meteo-Oceanografia Aplicadas à Indústria de O&amp;G e Energias Renováveis" data-optional>
+      <img class="logo-meteo" src="assets/logo-meteo-oceanografia.jpg" width="1254" height="1254" alt="Metodologias em Meteo-Oceanografia Aplicadas à Indústria de O&amp;G e Energias Renováveis" data-optional>
     </div>`;
 
   function render() {

@@ -121,11 +121,16 @@ button, input, select, textarea { font: inherit; color: inherit; }
   display: inline-flex; align-items: center; gap: 18px;
   background: #fff; border-radius: 10px; padding: 8px 14px; margin-bottom: 22px;
 }
-.logos img { display: block; height: 64px; width: auto; }
+/* Alturas diferentes de propósito: o selo circular precisa de mais altura que a marca
+   retangular do MASTER para ter o mesmo peso visual e manter o texto do anel legível. */
+.logos img { display: block; width: auto; }
+.logos .logo-master { height: 64px; }
+.logos .logo-meteo { height: 92px; }
 .logos .sep { width: 1px; align-self: stretch; background: #e2e8f0; }
 @media (max-width: 600px) {
   .logos { gap: 12px; padding: 6px 10px; }
-  .logos img { height: 46px; }
+  .logos .logo-master { height: 48px; }
+  .logos .logo-meteo { height: 68px; }
 }
 .kicker { font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); margin: 0; }
 .title { font-size: 30px; font-weight: 700; color: #fff; letter-spacing: -.01em; margin: 4px 0 0; line-height: 1.2; }
