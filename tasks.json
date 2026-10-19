@@ -648,6 +648,13 @@
           "description": ""
         },
         {
+          "id": "modernizacao-do-lec",
+          "title": "Modernização do LEC e rodar para todos os ciclones",
+          "status": "planned",
+          "type": "software",
+          "description": ""
+        },
+        {
           "id": "migracao-para-site-do-master",
           "title": "Migração para site do MASTER",
           "status": "planned",
